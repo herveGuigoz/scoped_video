@@ -8,7 +8,7 @@ final playerStateRef = StateRef<PlayerState>(PlayerState.buffering());
 
 final playerStatusRef = StateRef<PlayerStatus>(PlayerStatus.initialization());
 
-final durationsRef = StateRef<Frames>(Frames(), name: 'durationsRef');
+final framesRef = StateRef<Frames>(Frames(), name: 'durationsRef');
 
 final overlayVisibilityRef = StateRef(false, name: 'overlayVisibility');
 

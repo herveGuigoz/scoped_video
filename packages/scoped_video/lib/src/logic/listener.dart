@@ -30,7 +30,7 @@ abstract class VideoListenerLogicInterface with Logic implements Disposable {
 
   @protected
   void updateVideoFrames() {
-    updateState<Frames>(durationsRef, (_) => controller.durations);
+    updateState<Frames>(framesRef, (_) => controller.durations);
   }
 
   @protected
@@ -48,12 +48,10 @@ abstract class VideoListenerLogicInterface with Logic implements Disposable {
   }
 }
 
-/// Part of video scope logic.
+/// Default implementation of [VideoListenerLogicInterface]
 /// This object initalize and dispose video controller.
-///
-/// Video trimming view use another video scope so the method pushToTrimmer
-/// is use to cancel states updates on current scope during video trimming.
 class MainVideoListenerLogic extends VideoListenerLogicInterface {
+  /// Create Listener on [VideoController] for video from network.
   MainVideoListenerLogic(
     this.scope, {
     @required this.dataSources,
@@ -86,7 +84,7 @@ class MainVideoListenerLogic extends VideoListenerLogicInterface {
     }
   }
 
-  Future<void> pushToTrimmer(
+  Future<void> pauseListener(
     Future<void> Function(VideoController controller) callback,
   ) async {
     controller.removeListener(updateStates);
